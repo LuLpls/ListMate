@@ -1,0 +1,76 @@
+.navbar-container {
+  background-color: rgb(56, 57, 57);
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-center-content {
+  margin: 0 auto;
+  width: 120px;
+  height: 40px;
+  background-color: rgb(226, 174, 78);
+  border-radius: 15px;
+  text-align: center;
+  padding-top: 12px;
+}
+
+.navbar-img-wrapper img {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.navbar-img-wrapper img:hover {
+  content: url('../../public/hamburger_menu_black.png');
+}
+
+
+/* Sidebar */
+
+.sidebar-container {
+  background-color: rgb(56, 57, 57);
+  width: 200px;
+  height: 100%; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  transition: transform 0.3s ease; /* Přidáme animaci transformace */
+  transform: translateX(-100%);
+  z-index: -100;
+}
+
+/* Přidáme třídu pro zobrazení Sidebar */
+.sidebar-visible {
+  transform: translateX(0); /* Sidebar je viditelný */
+}
+
+.sidebar-nav {
+  margin-top: 80px;
+  margin-left: 200px;
+}
+
+
+
+.sidebar-link-container div {
+  width: 180px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-link-container div:hover {
+ background-color: black;
+}
+
+
+.sidebar-link-container a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  
+}
