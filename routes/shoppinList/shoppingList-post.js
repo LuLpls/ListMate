@@ -3,7 +3,11 @@ const shoppingListModel = require('../../models/shoppingList');
 
 
 shoppingListPost.post('/shoppinglist/post', async (req, res) => {
-    const { name } = req.body;
+    let { name } = req.body;
+    if(!name || name.trim() === '')  {
+      name = 'New List'
+    }
+    
     const shoppingList = new shoppingListModel(
         {
             name: name,

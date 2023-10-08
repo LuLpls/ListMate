@@ -6,8 +6,8 @@ const SideBar = () => {
     <div className='sidebar-container'>
       <nav className='sidebar-nav'>
         <div className='sidebar-link-container'>
-          <div><Link>Shopping Lists</Link></div>
-          <div><Link>Trash</Link></div>
+          <div><Link to='/'>Shopping Lists</Link></div>
+          <div><Link to='/trash'>Trash</Link></div>
         </div>
       </nav>
     </div>

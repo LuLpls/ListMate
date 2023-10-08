@@ -16,6 +16,10 @@
   padding-top: 12px;
 }
 
+.navbar-img-wrapper {
+  z-index: 1000;
+}
+
 .navbar-img-wrapper img {
   margin-left: 15px;
   cursor: pointer;
@@ -37,7 +41,6 @@
   left: 0; 
   transition: transform 0.3s ease; /* Přidáme animaci transformace */
   transform: translateX(-100%);
-  z-index: -100;
 }
 
 /* Přidáme třídu pro zobrazení Sidebar */

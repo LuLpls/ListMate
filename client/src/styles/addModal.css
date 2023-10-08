@@ -1,0 +1,56 @@
+.add-shoppinglist-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+}
+
+.add-shoppinglist-modal-content {
+  width: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+
+.add-shoppinglist-modal-form {
+  margin-top: 20px;
+}
+
+.add-shoppinglist-modal-form input {
+  width: 250px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.add-shoppinglist-modal-form label {
+  font-size: large;
+}
+
+.add-shoppinglist-modal-button-container {
+  margin-top: 40px;
+}
+
+.add-shoppinglist-modal-button-container button {
+  background-color: rgb(226, 174, 78);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+
+
+.add-shoppinglist-modal-button-container button:hover {
+  background-color: rgb(203, 145, 39);
+}

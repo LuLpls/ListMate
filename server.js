@@ -11,6 +11,7 @@ const shoppingListPost  = require('./routes/shoppinList/shoppingList-post')
 const shoppingListGet  = require('./routes/shoppinList/shoppingList-get')
 const shoppingListList  = require('./routes/shoppinList/shoppingList-list')
 const shoppingListDelete  = require('./routes/shoppinList/shoppingList-delete')
+const shoppingListPermanentDelete  = require('./routes/shoppinList/shoppingList-permanentDelete')
 const shoppingListUpdate  = require('./routes/shoppinList/shoppingList-update')
 
 const itemPost = require('./routes/item/item-post')
@@ -31,7 +32,9 @@ app.use('/', shoppingListPost)
 app.use('/', shoppingListGet)
 app.use('/', shoppingListList)
 app.use('/', shoppingListDelete)
+app.use('/', shoppingListPermanentDelete)
 app.use('/', shoppingListUpdate)
+
 
 // Routy item
 app.use('/', itemPost)

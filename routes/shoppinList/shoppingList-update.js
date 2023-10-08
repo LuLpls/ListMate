@@ -9,6 +9,7 @@ shoppingListUpdate.put('/shoppinglist/update/:id', async (req, res) => {
           shoppinglistId, 
             { $set: { 
                 name: req.body.name,
+                deleted: req.body.deleted
              }
             },
             { new: true } 

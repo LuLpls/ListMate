@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
+@media (min-width: 1000px) {
+  .content {
+      padding-left: 200px;
+  }
+}
+
+body {
+  background-color: rgb(213, 224, 233);
+}
