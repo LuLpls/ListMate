@@ -1,9 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import '../styles/addModal.css'
+import { useState, useEffect, useContext } from 'react'
+import '../styles/createModal.css'
+import { ShoppingListContext } from './context/ShoppingListContext';
 
-const CreateModal = ({ initialShoppingListData, onClose }) => {
+
+const RenameModal = ({ initialShoppingListData, onClose }) => {
   const [shoppingListData, setshoppingListData] = useState({...initialShoppingListData})
+  const { shoppingLists, updateShoppingList  } = useContext(ShoppingListContext)
 
   // získání dat seznamu pomocí fetch
   useEffect(() => {
@@ -36,6 +39,11 @@ const CreateModal = ({ initialShoppingListData, onClose }) => {
       if (response.ok) {
         // přesměrování na nově přidaný nákupní seznam
         onClose()
+        // Aktualizace seznamu v kontextu
+        const updatedList = await response.json()
+
+        updateShoppingList(updatedList)
+        
         console.log('Shopping list was succesfully updated')
       } else {
         // Zpracování chyby, pokud server vrátí chybový stav.
@@ -87,4 +95,4 @@ const CreateModal = ({ initialShoppingListData, onClose }) => {
   )
 }
 
-export default CreateModal
+export default RenameModal

@@ -18,6 +18,7 @@ const itemPost = require('./routes/item/item-post')
 const itemDelete = require('./routes/item/item-delete')
 const itemList = require('./routes/item/item-list')
 const itemUpdate = require('./routes/item/item-update')
+const itemComplete = require('./routes/item/item-complete')
 
 // Napojení na databázi
 const db = new DB()
@@ -41,6 +42,7 @@ app.use('/', itemPost)
 app.use('/', itemDelete)
 app.use('/', itemList)
 app.use('/', itemUpdate)
+app.use('/', itemComplete)
 
 app.get('/' ,(req, res) => {
   res.send('Jsi na hlavní stránce')

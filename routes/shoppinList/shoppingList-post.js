@@ -7,10 +7,12 @@ shoppingListPost.post('/shoppinglist/post', async (req, res) => {
     if(!name || name.trim() === '')  {
       name = 'New List'
     }
+    let items = []
     
     const shoppingList = new shoppingListModel(
         {
             name: name,
+            items: items
         }
     )
 

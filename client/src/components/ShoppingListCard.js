@@ -1,65 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/shoppingListCard.css'
 import RenameModal from './RenameModal'
+import { ShoppingListContext } from '../components/context/ShoppingListContext'
 
 const ShoppingListCard = ({ shoppingListData }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
   const [timeStamp, setTimeStamp] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  
-  const deleteShoppingList = async () => {
-    if(shoppingListData.deleted) {
-      try {
-        const response = await fetch(`http://localhost:5000/shoppinglist/permanent-delete/${shoppingListData._id}`, {
-          method: 'DELETE',
-        });
-    
-        if (response.ok) {
-          console.log('Shopping List has been permanently deleted');
-        } else {
-          console.error('Error during permanent deletion of the shopping list');
-        }
-      } catch (error) {
-        console.error('Error communicating with the server:', error);
-      }
-    } else {
-      try {
-        const response = await fetch(`http://localhost:5000/shoppinglist/delete/${shoppingListData._id}`, {
-          method: 'DELETE',
-        });
-    
-        if (response.ok) {
-          // Zde můžete provést aktualizaci seznamu, pokud je to nutné
-          console.log('Shopping List has been moved to the trash');
-        } else {
-          console.error('Error during the movingt into the trash');
-        }
-      } catch (error) {
-        console.error('Error communicating with the server:', error);
-      }
-    }
-  };
-
-  const restoreShoppingList = async () => {
-    try { 
-      const response = await fetch(`http://localhost:5000/shoppinglist/update/${shoppingListData._id}`, {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({...shoppingListData, deleted: false}),
-      })
-      if (response.ok) {
-        console.log('Shopping List has been restored.')
-      } else {
-        console.error('Error during the restoration.')
-      }
-    } catch (error) {
-      console.error('Error communicating with the server:', error)
-    }
-  };
+  const { shoppingLists, deleteShoppingList, restoreShoppingList  } = useContext(ShoppingListContext);
 
   const toggleDropDown =(e) => {
     e.preventDefault()
@@ -101,13 +50,13 @@ const ShoppingListCard = ({ shoppingListData }) => {
         <div className='shoppinglist-card-dropdown'>
           <div className='shoppinglist-card-button' onClick={() => setIsModalOpen(true)} >Rename</div>
           <div className='shoppinglist-card-button' >Share</div>
-          <div className='shoppinglist-card-button' onClick={deleteShoppingList}>Delete</div>
+          <div className='shoppinglist-card-button' onClick={() => {deleteShoppingList(shoppingListData)}}>Delete</div>
         </div>
       )}
       {isDropDownOpen  && shoppingListData.deleted && (
         <div className='shoppinglist-card-dropdown'>
-          <div className='shoppinglist-card-button' onClick={restoreShoppingList}>Restore</div>
-          <div className='shoppinglist-card-button' onClick={deleteShoppingList}>Delete</div>
+          <div className='shoppinglist-card-button' onClick={() => {restoreShoppingList(shoppingListData)}}>Restore</div>
+          <div className='shoppinglist-card-button' onClick={() => {deleteShoppingList(shoppingListData)}} >Delete</div>
         </div>
       )}
       {isModalOpen && (<RenameModal  initialShoppingListData={shoppingListData} isOpen={isModalOpen} onClose={() => {setIsModalOpen(false)}}/>)}     

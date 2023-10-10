@@ -1,13 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
-import '../styles/addModal.css'
+import { useState, useContext } from 'react'
+import '../styles/createModal.css'
+import {  ShoppingListContext } from './context/ShoppingListContext'
 
-const CreateModal = ({ isOpen, onClose }) => {
-  const [shoppingListData, setshoppingListData] = useState({
+const CreateModal = ({ onClose }) => {
+  const [shoppingListName, setshoppingListName] = useState({
     name: '',
   })
 
-  const onAddShoppingList = async (shoppingListData) => {
+  const { addShoppingList } = useContext(ShoppingListContext)
+
+  const onAddShoppingList = async (shoppingListName) => {
     try {
       const response = await fetch('http://localhost:5000/shoppinglist/post', {
         method: 'POST',
@@ -15,11 +18,12 @@ const CreateModal = ({ isOpen, onClose }) => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(shoppingListData),
+        body: JSON.stringify(shoppingListName),
       })
 
       if (response.ok) {
-        // přesměrování na nově přidaný recept
+        const createdShoppingList = await response.json()
+        addShoppingList(createdShoppingList)
         onClose()
         console.log('ShoppingList was succesfully created')
       } else {
@@ -35,13 +39,13 @@ const CreateModal = ({ isOpen, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    onAddShoppingList(shoppingListData)
+    onAddShoppingList(shoppingListName)
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setshoppingListData({
-      ...shoppingListData,
+    setshoppingListName({
+      ...shoppingListName,
       [name]: value,
     })
   }
@@ -59,7 +63,7 @@ const CreateModal = ({ isOpen, onClose }) => {
                 placeholder='New list'
                 type="text" 
                 name="name"
-                value={shoppingListData.name}
+                value={shoppingListName.name}
                 onChange={handleChange}
               />
             </label>

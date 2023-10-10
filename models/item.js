@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const itemModel = new mongoose.Schema({
-  shoppingListId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'ShoppingList', 
-    required: true,
-  },
     name: {
       type: String,
       required: true,
@@ -14,7 +9,7 @@ const itemModel = new mongoose.Schema({
     unit: String,
     completed: {
       type: Boolean,
-      required: true
+      default: false
     },
   },
   {

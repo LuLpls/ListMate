@@ -1,0 +1,19 @@
+.item-card-wrapper {
+  display: block;
+  margin: 0 auto;
+  background-color: aliceblue;
+  width: 50%;
+  padding: 10px 35px;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+.item-card-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-card-container input {
+  
+  width: 20px;
+}
