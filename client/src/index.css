@@ -9,6 +9,10 @@
   }
 }
 
+.content {
+  padding-bottom: 60px;
+} 
+
 body {
-  background-color: rgb(213, 224, 233);
+  background-color: rgb(48, 48, 48);
 }

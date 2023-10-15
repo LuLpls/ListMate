@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
-import '../styles/createModal.css'
-import { ShoppingListContext } from './context/ShoppingListContext';
+import '../styles/createShoppingListModal.css'
+import { ShoppingListsContext } from './context/ShoppingListContext';
 
 
 const RenameModal = ({ initialShoppingListData, onClose }) => {
   const [shoppingListData, setshoppingListData] = useState({...initialShoppingListData})
-  const { shoppingLists, updateShoppingList  } = useContext(ShoppingListContext)
+  const [error, setError] = useState('')
+  const { updateShoppingList  } = useContext(ShoppingListsContext)
 
   // získání dat seznamu pomocí fetch
   useEffect(() => {
@@ -37,27 +38,23 @@ const RenameModal = ({ initialShoppingListData, onClose }) => {
       })
 
       if (response.ok) {
-        // přesměrování na nově přidaný nákupní seznam
         onClose()
-        // Aktualizace seznamu v kontextu
         const updatedList = await response.json()
-
         updateShoppingList(updatedList)
-        
         console.log('Shopping list was succesfully updated')
       } else {
-        // Zpracování chyby, pokud server vrátí chybový stav.
         console.error('Shopping List wasnt update.')
       }
     } catch (error) {
-      // Zpracování chyby při komunikaci se serverem.
       console.error('Error communicating with the server:', error)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onUpdateShoppingList(shoppingListData)
+    if (!error) {
+      onUpdateShoppingList(shoppingListData)
+    }
   }
 
   const handleChange = (e) => {
@@ -66,13 +63,21 @@ const RenameModal = ({ initialShoppingListData, onClose }) => {
       ...shoppingListData,
       [name]: value,
     })
+
+    if (value.length > 30) {
+      setError('The input length must not exceed 30 characters.')
+    } else {
+      setError('')
+    }
   }
 
   return (
-    <div className='add-shoppinglist-modal-container'>
-      <div className='add-shoppinglist-modal-content'>
-        <h2>Rename Shopping List</h2>
-        <form className='add-shoppinglist-modal-form' onSubmit={handleSubmit}>
+    <div className='create-shoppinglist-modal-container'>
+      <div className='create-shoppinglist-modal-content'>
+        <div className='create-shoppinglist-modal-title'>
+          <h2>Rename Shopping List</h2>
+        </div>
+        <form className='create-shoppinglist-modal-form' onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">
               Name: 
@@ -83,9 +88,10 @@ const RenameModal = ({ initialShoppingListData, onClose }) => {
                 value={shoppingListData.name}
                 onChange={handleChange}
               />
+              { error && <div className='create-shoppinglist-error-message'>{error}</div> }
             </label>
           </div>
-          <div className='add-shoppinglist-modal-button-container'>
+          <div className='create-shoppinglist-modal-button-container'>
             <button onClick={onClose}>Cancel</button>
             <button type="submit">Rename</button>
           </div>

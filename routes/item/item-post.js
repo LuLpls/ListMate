@@ -4,13 +4,13 @@ const shoppingListModel = require('../../models/shoppingList');
 
 itemtPost.post('/shoppinglist/:id/item/post', async (req, res) => {
     const shoppingListId = req.params.id;
-    const { name, completed, quantity, unit } = req.body
+    const { name, completed} = req.body
     const item = 
         {
             name: name,
             completed: completed,
-            quantity: quantity,
-            unit: unit,
+            quantity: '',
+            unit: '',
         }
     
 
@@ -23,9 +23,7 @@ itemtPost.post('/shoppinglist/:id/item/post', async (req, res) => {
           { new: true }
         )
 
-        const newItem = shoppingList.items[shoppingList.items.length - 1]
-
-    return res.json(newItem) 
+    return res.json(shoppingList) 
     
     } catch (err) {
             return res.status(500).json({ msg: 'Interní serverová chyba' })

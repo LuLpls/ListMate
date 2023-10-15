@@ -2,29 +2,80 @@
   display: block;
   margin: 30px auto;
   padding: 35px;
-  background-color: aquamarine;
+  background-color: rgb(31, 31, 31);
   width: 50%;
-  border: solid 1px;
+  min-width: 340px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.shoppinglist-detail-completed-items {
+  display: block;
+  margin: 30px auto;
+  padding: 35px;
+  background-color: rgb(31, 31, 31);
+  width: 50%;
+  min-width: 350px;
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 20px;
 }
 
 .shoppinglist-detail-title {
   display: flex;
   justify-content: space-between;
-  
+  align-items: baseline;
+  color: rgb(245, 245, 245);
+}
+
+.shoppinglist-detail-completed-index {
+  background-color: rgb(226, 174, 78);
+  border-radius: 8px;
 }
 
 .shoppinglist-detail-title p {
   font-size: 25px;
+  color: black;
+  padding: 3px 6px;
+  font-weight: bold;
 }
 
 .shoppinglist-detail-input {
+  width: 100%;
   margin: 20px 20px 0 0;
-
 }
 
 .shoppinglist-detail-input input {
   width: 100%;
   height: 30px;
   padding: 5px 5px 5px 10px;
+  border-radius: 8px;
+  background-color: rgb(198, 198, 198);
+  font-size: large;
+}
+
+.shoppinglist-detail-items {
+  margin-top: 15px;
+}
+
+.shoppinglist-detail-iput-plus-container {
+  display: flex;
+  justify-content: space-between;
+  gap:20px
+}
+
+.shoppinglist-detail-plus-icon {
+  position: relative;
+  align-self: flex-end;
+  margin-bottom: 5px;
+  background-color: rgb(226, 174, 78);
+  border-radius: 25px;
+}
+
+.shoppinglist-detail-plus-icon img {
+  align-items: center;
+  vertical-align: middle;
+}
+
+.shoppinglist-detail-plus-icon:hover {
+  background-color: rgb(203, 145, 39);
 }

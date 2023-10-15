@@ -3,13 +3,13 @@ import { useEffect, useState, useContext } from 'react'
 import ShoppingListCard from '../components/ShoppingListCard'
 import '../styles/shoppingListList.css'
 import CreateModal from '../components/CreateModal'
-import { ShoppingListContext } from '../components/context/ShoppingListContext'
+import { ShoppingListsContext } from '../components/context/ShoppingListContext'
 
 const ShoppingListList = () => {
 
   // deklarace stavů
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { shoppingLists, loadShoppingLists  } = useContext(ShoppingListContext);
+  const { shoppingLists, loadShoppingLists  } = useContext(ShoppingListsContext);
 
   useEffect(() => {
     loadShoppingLists(false)

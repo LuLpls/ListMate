@@ -2,11 +2,11 @@ import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import ShoppingListCard from '../components/ShoppingListCard'
 import '../styles/shoppingListList.css'
-import { ShoppingListContext } from '../components/context/ShoppingListContext'
+import { ShoppingListsContext } from '../components/context/ShoppingListContext'
 
 const ShoppingListList = () => {
 
-  const { shoppingLists, loadShoppingLists  } = useContext(ShoppingListContext);
+  const { shoppingLists, loadShoppingLists  } = useContext(ShoppingListsContext);
 
   useEffect(() => {
     loadShoppingLists(true)

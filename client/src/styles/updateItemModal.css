@@ -1,0 +1,122 @@
+.update-item-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+}
+
+.update-item-modal-content {
+  width: 400px;
+  background-color: rgb(31, 31, 31);
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  color: rgb(245, 245, 245);
+}
+
+.update-item-modal-name-input input{
+  width: 280px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 17px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: rgb(198, 198, 198);
+}
+
+.update-item-modal-name-input label {
+ font-size: large;
+}
+
+.update-item-modal-quantity-unit-container {
+  display: flex;
+}
+
+.update-item-modal-quantity-input {
+  margin-right: 40px;
+}
+
+.update-item-modal-quantity-input input, 
+.update-item-modal-unit-input input  {
+  height: 30px;
+  width: 80px;
+  margin-left: 5px;
+  padding-left: 10px;
+  border-radius: 8px;
+  background-color: rgb(198, 198, 198);
+}
+
+.update-item-modal-unit-input input {
+  width: 118px;
+}
+
+.update-item-modal-title {
+  background-color: rgb(226, 174, 78);
+  width: 440px;
+  height: 50px;
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-bottom: 30px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-item-modal-title h2 {
+  color: black;
+}
+
+.update-item-modal-form {
+  margin-top: 20px;
+}
+
+
+.update-item-modal-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px
+}
+
+.update-item-modal-button-container button {
+  background-color: rgb(226, 174, 78);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.update-item-modal-button-container button:hover {
+  background-color: rgb(203, 145, 39);
+}
+
+.update-item-modal-delete-button button {
+  background-color: rgb(235, 34, 34);
+}
+
+.update-item-modal-delete-button button:hover {
+  background-color: rgb(153, 16, 16);
+}
+
+.update-item-modal-error-message-name {
+  color: rgb(233, 48, 48);
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+.update-item-modal-error-message-unit {
+  color: rgb(233, 48, 48);
+  margin-top: 6px;
+  max-width: 200px;
+  overflow-wrap: break-word ;
+}

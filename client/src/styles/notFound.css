@@ -1,0 +1,28 @@
+.notfound-container {
+  text-align: center;
+  margin-top:  150px;
+}
+
+.notfound-container h2 {
+  font-size: 60px;
+  color: rgb(235, 235, 235);
+}
+
+.notfound-container p {
+  font-size: 27px;
+  color: rgb(235, 235, 235);
+}
+
+.notfound-button {
+  margin: 15px;
+  padding: 10px;
+  background-color: rgb(226, 174, 78);
+  font-weight: bold;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.notfound-button:hover {
+  background-color: rgb(203, 145, 39);
+}

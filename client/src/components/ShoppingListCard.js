@@ -2,36 +2,18 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/shoppingListCard.css'
 import RenameModal from './RenameModal'
-import { ShoppingListContext } from '../components/context/ShoppingListContext'
+import { ShoppingListsContext } from '../components/context/ShoppingListContext'
 
 const ShoppingListCard = ({ shoppingListData }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
-  const [timeStamp, setTimeStamp] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { shoppingLists, deleteShoppingList, restoreShoppingList  } = useContext(ShoppingListContext);
+  const { deleteShoppingList, restoreShoppingList  } = useContext(ShoppingListsContext);
 
   const toggleDropDown =(e) => {
     e.preventDefault()
     e.stopPropagation();
     setIsDropDownOpen(!isDropDownOpen)
   }
-
-  useEffect(() => {
-    if (shoppingListData.updatedAt > shoppingListData.createdAt) {
-      const date = new Date(shoppingListData.updatedAt)
-      const month = date.getMonth() + 1
-      const dayOfMonth = date.getDate()
-      const formattedDate = `${dayOfMonth}. ${month}.`
-      setTimeStamp(formattedDate) 
-    } else {
-      const date = new Date(shoppingListData.createdAt)
-      const month = date.getMonth() + 1
-      const dayOfMonth = date.getDate()
-      const formattedDate = `${dayOfMonth}. ${month}.`
-      setTimeStamp(formattedDate)
-    }
-  }, [shoppingListData.updatedAt, shoppingListData.createdAt])
-
 
   return (
     <div className='shoppinglist-card-container'>
@@ -40,10 +22,8 @@ const ShoppingListCard = ({ shoppingListData }) => {
           <div className='shoppinglist-card-name-wrapper'>
             <h2>{shoppingListData.name}</h2>
           </div>
-          <div>
-            <p>{timeStamp}</p>
-          </div>
-          <button onClick={toggleDropDown} ><img src="./option_dots.png" alt="options" /></button>
+          
+          <button onClick={toggleDropDown} ><img src="./options_dots.png" alt="options" /></button>
         </div>
       </Link>
       {isDropDownOpen  && !shoppingListData.deleted && (

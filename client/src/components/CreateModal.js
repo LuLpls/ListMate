@@ -1,16 +1,17 @@
 import React from 'react'
 import { useState, useContext } from 'react'
-import '../styles/createModal.css'
-import {  ShoppingListContext } from './context/ShoppingListContext'
+import { useNavigate } from 'react-router-dom'
+import '../styles/createShoppingListModal.css'
+import {  ShoppingListsContext } from './context/ShoppingListContext'
 
 const CreateModal = ({ onClose }) => {
-  const [shoppingListName, setshoppingListName] = useState({
-    name: '',
-  })
+  const [shoppingListName, setshoppingListName] = useState({ name: '' })
+  const [error, setError] = useState('')
 
-  const { addShoppingList } = useContext(ShoppingListContext)
+  const { createShoppingList } = useContext(ShoppingListsContext)
+ const navigate = useNavigate()
 
-  const onAddShoppingList = async (shoppingListName) => {
+  const onCreateShoppingList = async (shoppingListName) => {
     try {
       const response = await fetch('http://localhost:5000/shoppinglist/post', {
         method: 'POST',
@@ -23,7 +24,8 @@ const CreateModal = ({ onClose }) => {
 
       if (response.ok) {
         const createdShoppingList = await response.json()
-        addShoppingList(createdShoppingList)
+        createShoppingList(createdShoppingList)
+        navigate(`/shoppinglist/${createdShoppingList._id}`);
         onClose()
         console.log('ShoppingList was succesfully created')
       } else {
@@ -38,8 +40,10 @@ const CreateModal = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    onAddShoppingList(shoppingListName)
+    if (!error) {
+      onCreateShoppingList(shoppingListName)
+    }
+    
   }
 
   const handleChange = (e) => {
@@ -48,14 +52,23 @@ const CreateModal = ({ onClose }) => {
       ...shoppingListName,
       [name]: value,
     })
+
+    if (value.length > 30) {
+      setError('The name must not exceed 30 characters.')
+    } else {
+      setError('')
+    }
   }
 
   return (
-    <div className='add-shoppinglist-modal-container'>
-      <div className='add-shoppinglist-modal-content'>
-        <h2>Create Shopping List</h2>
+    <div className='create-shoppinglist-modal-container'>
+      <div className='create-shoppinglist-modal-content'>
+        <div className='create-shoppinglist-modal-title'>
+          <h2>Create Shopping List</h2>
+        </div>
         
-        <form className='add-shoppinglist-modal-form' onSubmit={handleSubmit}>
+        
+        <form className='create-shoppinglist-modal-form' onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">
               Name: 
@@ -66,9 +79,10 @@ const CreateModal = ({ onClose }) => {
                 value={shoppingListName.name}
                 onChange={handleChange}
               />
+              { error && <div className='create-shoppinglist-error-message'>{error}</div> }
             </label>
           </div>
-          <div className='add-shoppinglist-modal-button-container'>
+          <div className='create-shoppinglist-modal-button-container'>
             <button onClick={onClose}>Cancel</button>
             <button type="submit">Create</button>
           </div>

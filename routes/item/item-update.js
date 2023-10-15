@@ -27,13 +27,8 @@ itemUpdate.put('/shoppinglist/:shoppingListId/item/update/:itemId', async (req, 
           return res.status(404).json({ msg: 'Nákupní seznam nebyl nalezen'});
       }
 
-      const updatedItem = await shoppingListModel.findOne({
-        _id: shoppinglistId,
-        'items._id': itemId,
-      }, {
-        'items.$': 1, // Vrátí pouze aktualizovanou položku
-      })
-      return res.json(updatedItem.items[0])
+     
+      return res.json(shoppingList)
             
     } catch (err) {
             return res.status(500).json({ msg: 'Interní serverová chyba' })

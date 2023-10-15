@@ -1,12 +1,12 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-export const ShoppingListContext = createContext();
+export const ShoppingListsContext = createContext();
 
-export const useShoppingList = () => {
-  return useContext(ShoppingListContext);
+export const useShoppingLists = () => {
+  return useContext(ShoppingListsContext);
 }
 
-export const ShoppingListProvider = ({ children }) => {
+export const ShoppingListsProvider = ({ children }) => {
 
   // stav kde je pole všech nákupních seznamu
   const [shoppingLists, setShoppingLists] = useState([]);
@@ -20,20 +20,16 @@ export const ShoppingListProvider = ({ children }) => {
       }
       const data = await response.json();
       const filteredLists = data.filter(shoppingList => shoppingList.deleted === isDeleted);
-      setShoppingLists(filteredLists);
+      setShoppingLists([...filteredLists].reverse());
     } catch (error) {
       console.error('Error fetching shopping lists:', error);
       throw error;
     }
   };
 
-  useEffect(() => {
-    
-  }, [])
-
   // funkce pro přidání nového seznamu
-  const addShoppingList = (newList) => {
-    setShoppingLists([...shoppingLists, newList])
+  const createShoppingList = (newList) => {
+    setShoppingLists([newList, ...shoppingLists])
   }
 
 // funkce pro rename seznamu
@@ -105,9 +101,18 @@ const restoreShoppingList = async (shoppingList) => {
 };
 
   return (
-    <ShoppingListContext.Provider value={{ shoppingLists, loadShoppingLists, addShoppingList, updateShoppingList, deleteShoppingList, restoreShoppingList }}>
+    <ShoppingListsContext.Provider 
+      value={{ 
+        shoppingLists, 
+        loadShoppingLists, 
+        createShoppingList, 
+        updateShoppingList, 
+        deleteShoppingList, 
+        restoreShoppingList 
+      }}
+    >
       {children}
-    </ShoppingListContext.Provider>
+    </ShoppingListsContext.Provider>
   );
 };
 

@@ -16,7 +16,6 @@ const shoppingListUpdate  = require('./routes/shoppinList/shoppingList-update')
 
 const itemPost = require('./routes/item/item-post')
 const itemDelete = require('./routes/item/item-delete')
-const itemList = require('./routes/item/item-list')
 const itemUpdate = require('./routes/item/item-update')
 const itemComplete = require('./routes/item/item-complete')
 
@@ -40,7 +39,6 @@ app.use('/', shoppingListUpdate)
 // Routy item
 app.use('/', itemPost)
 app.use('/', itemDelete)
-app.use('/', itemList)
 app.use('/', itemUpdate)
 app.use('/', itemComplete)
 

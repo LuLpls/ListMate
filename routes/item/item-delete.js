@@ -1,23 +1,28 @@
 const itemDelete = require('express').Router();
-const itemModel = require('../../models/item')
+const shoppingListModel = require('../../models/shoppingList')
 
 itemDelete.delete('/shoppinglist/:shoppingListId/item/delete/:itemId', async (req, res) => {
     const shoppingListId = req.params.shoppingListId
     const itemId  = req.params.itemId
 
     try {
-        const item = await itemModel.findByIdAndDelete({_id: itemId});
-        if(!item) {
-            return res.status(404).json({ msg: 'Položka nebyla nalezena'});
-            
-        }
+      const shoppingList = await shoppingListModel.findById(shoppingListId);
+      if (!shoppingList) {
+          return res.status(404).json({ msg: 'Nákupní seznam nebyl nalezen' });
+      }
 
-        return res.json({msg: `Položka: ${item.name} byla úspěšně smazána`});
-            
-    } catch (err) {
-            return res.status(500).json({ msg: 'Interní serverová chyba' })
-            
-        }
+      const itemIndex = shoppingList.items.findIndex(item => item._id.toString() === itemId);
+      if (itemIndex === -1) {
+          return res.status(404).json({ msg: 'Položka nebyla nalezena' });
+      }
+      
+      shoppingList.items.splice(itemIndex, 1);
+      await shoppingList.save();
+
+      return res.json({ msg: `Položka byla úspěšně smazána` });
+  } catch (err) {
+      return res.status(500).json({ msg: 'Interní serverová chyba' });
+  }
 
 } )
 

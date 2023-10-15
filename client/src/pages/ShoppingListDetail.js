@@ -1,99 +1,57 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useContext } from 'react'
 import '../styles/shoppingListDetail.css'
 import Item from '../components/ItemsCard'
+import { ShoppingListDetailContext } from '../components/context/ItemContext'
 
 const ShoppingListDetail = () => {
 
   const { id } = useParams()
 
-  const [shoppingListData, setShoppingListData] = useState(null)
   const [itemInput, setItemInput] = useState({'name': '', 'completed': false, 'unit': '', 'quantity': ''})
+  const { shoppingList, loadShoppingList, postItem  } = useContext(ShoppingListDetailContext);
 
   // získání dat o nákupním seznamu pomocí fetch
   useEffect(() => {
     if (id) {
-        const fetchShoppingListData = async () => {
-            try {
-              const response = await fetch(`http://localhost:5000/shoppinglist/get/${id}`)
-              if (!response.ok) {
-                throw new Error('Failed to load shopping list details.')
-              }
-              const data = await response.json()
-              setShoppingListData(data)
-              
-            } catch (error) {
-                console.error('Error whyle loading shopping list details:', error)
-            }
-        }
-        fetchShoppingListData() 
+      loadShoppingList(id);
     }
-}, [ id])
+  }, [id]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+      setItemInput({
+        ...itemInput,
+        [name]: value,
+      })
+  }
 
+  const handlePost = () => {
+    console.log('Itam has been posted');
+      postItem(id, itemInput)
+      setItemInput({name: ''})
+  }
 
-// Přidání položky na nákupní seznam
-const postItem = async (itemInput) => {
-  try {
-    const response = await fetch(`http://localhost:5000/shoppinglist/${id}/item/post`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itemInput),
-    })
-
-    if (response.ok) {
-      console.log('Item was succesfully added')
-      const newItem = await response.json()
-        setShoppingListData(prevData => {
-          return {
-            ...prevData,
-            items: [...prevData.items, newItem]
-          }
-        })
-
-        // Vymazat text v inputu
-        setItemInput({ 'name': '' })
-    } else {
-      console.error('Item wasnt created.')
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handlePost()
     }
-  } catch (error) {
-    console.error('Server communication error:', error)
   }
-}
-
-const handleChange = (e) => {
-  const { name, value } = e.target
-    setItemInput({
-      ...itemInput,
-      [name]: value,
-    })
-}
-
-const handleKeyPress = (e) => {
-  if (e.key === 'Enter') {
-    // Zde provedete akci, kterou chcete provést po stisknutí Enter
-    console.log('Enter has been pushed');
-    postItem(itemInput)
-    
-  }
-}
-
 
   return (
     <div>
-      { shoppingListData && (
+      { shoppingList ? (
         <div>
           <div className='shoppinglist-detail-title-box-container'>
             <div className='shoppinglist-detail-title'>
-              <h2>{shoppingListData.name}</h2> 
-              {shoppingListData.items && <p>0/{shoppingListData.items.length}</p>}
+              <h2>{shoppingList.name}</h2> 
+              <div className='shoppinglist-detail-completed-index'>
+                {shoppingList?.items && <p>{shoppingList.items.filter((item) => item.completed).length}/{shoppingList.items.length}</p>}
+              </div>
             </div>
-          
-            <div className='shoppinglist-detail-input'>
+            <div className='shoppinglist-detail-iput-plus-container'>
+              <div className='shoppinglist-detail-input'>
                 <label htmlFor="name">
                   <input 
                     placeholder='New item'
@@ -104,17 +62,28 @@ const handleKeyPress = (e) => {
                     onKeyPress={handleKeyPress}
                   />
                 </label>
+              </div>
+              <div className='shoppinglist-detail-plus-icon' onClick={handlePost}><img src="/plus_icon.png" alt="plus" /></div>
+            </div>
+            <div className='shoppinglist-detail-items'>
+              {shoppingList?.items && shoppingList.items.map((item, index) => {   
+                if (!item.completed) {   
+                  return <Item key={index} item={item}/>
+                }
+              })}
             </div>
           </div>
-          <div>
-            {shoppingListData.items.map((item, index) => {           
-                 return <Item key={index} item={item}/>
-            })}
-          </div>
-            
-            
+          {shoppingList?.items && shoppingList.items.some((item) => item.completed) ? (
+            <div className='shoppinglist-detail-completed-items'>
+              {shoppingList?.items && shoppingList.items.map((item, index) => {   
+                if (item.completed) {   
+                  return <Item key={index} item={item}/>
+                }
+              })}
             </div>
-      )}
+          ) : null }
+        </div>
+      ) : <div>pending</div> }
     </div>
   )
 }

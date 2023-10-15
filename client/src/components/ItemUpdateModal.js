@@ -1,39 +1,20 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { ShoppingListDetailContext } from '../components/context/ItemContext'
+import '../styles/updateItemModal.css'
 
 const ItemUpdateModal = ({ initialItemData, onClose, shoppingListId }) => {
 
   const [ItemData, setItemData] = useState({...initialItemData})
+  const [errors, setErrors] = useState({name: '', quantity: '', unit: ''})
+  const { updateItem, deleteItem } = useContext(ShoppingListDetailContext)
   
-
-  const onUpdateItem = async (updatedItem) => {
-   
-    try {
-      const response = await fetch(`http://localhost:5000/shoppinglist/${shoppingListId}/item/update/${ItemData._id}`, {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedItem),
-      })
-
-      if (response.ok) {
-        console.log('Item was succesfully updated')
-      } else {
-        // Zpracování chyby, pokud server vrátí chybový stav.
-        console.error('Item wasnt updated.')
-      }
-    } catch (error) {
-      // Zpracování chyby při komunikaci se serverem.
-      console.error('Error communicating with the server:', error)
+  const handleSubmit = (e) => {
+    if (!errors.name && !errors.unit) {
+      updateItem(shoppingListId, initialItemData._id, ItemData  )
+      onClose()
     }
-  }
-
-  const handleSubmit = () => {
-    onUpdateItem(ItemData)
-    onClose()
-    
+    e.preventDefault()
   }
 
   const handleChange = (e) => {
@@ -42,50 +23,89 @@ const ItemUpdateModal = ({ initialItemData, onClose, shoppingListId }) => {
       ...ItemData,
       [name]: value
     })
-  }
+    
 
+    if (name === 'name') {
+      if (value.length > 30) {
+      setErrors((prevErrors) => ({ ...prevErrors, name: 'The name must not exceed 30 characters.' }))
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, name: '' }))
+    }
+  }
+    
+    if (name === 'unit') {
+      if (value.length > 10) {
+      setErrors((prevErrors) => ({ ...prevErrors, unit: 'The unit must not exceed 10 characters.' }))
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, unit: '' }))
+    }
+  }
+   
+}
+  
+console.log(errors)
   return (
-    <div className='add-shoppinglist-modal-container'>
-      <div className='add-shoppinglist-modal-content'>
-        <h2>Update Item</h2>
-        <form className='add-shoppinglist-modal-form' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">
-              Name: 
-              <input 
-                placeholder='Item name'
-                type="text" 
-                name="name"
-                value={ItemData.name}
-                onChange={handleChange}
-              />
-            </label>
-            <label htmlFor="name">
-              Quantity: 
-              <input 
-                placeholder='Item quantity'
-                type="text" 
-                name="quantity"
-                value={ItemData.quantity}
-                onChange={handleChange}
-              />
-            </label>
-            <label htmlFor="name">
-              Unit: 
-              <input 
-                placeholder='Item quantity'
-                type="text" 
-                name="unit"
-                value={ItemData.unit}
-                onChange={handleChange}
-              />
-            </label>
-            <div><button>delete</button></div>
+    <div className='update-item-modal-container'>
+      <div className='update-item-modal-content'>
+        <div className='update-item-modal-title'>
+          <h2>Update Item</h2>
+        </div>
+        <form className='update-item-modal-form' onSubmit={handleSubmit}>
+          <div className='update-item-modal-inputs-container'>
+            <div className='update-item-modal-name-input'>
+              <label htmlFor="name">
+                Name: 
+                <input 
+                  placeholder='Item name'
+                  type="text" 
+                  name="name"
+                  required
+                  value={ItemData.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <div className='update-item-modal-error-message-name'>{errors.name}</div>}
+              </label>
+            </div>
             
+            <div className='update-item-modal-quantity-unit-container'>
+              <div className='update-item-modal-quantity-input'>
+                <label htmlFor="quantity">
+                  Quantity: 
+                  <input 
+                    placeholder='Item quantity'
+                    type="number" 
+                    name="quantity"
+                    max={999}
+                    value={ItemData.quantity}
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+              <div className='update-item-modal-unit-input'>
+                <label htmlFor="unit">
+                  Unit: 
+                  <input 
+                    placeholder='Item unit'
+                    type="text" 
+                    name="unit"
+                    value={ItemData.unit}
+                    onChange={handleChange}
+                  />
+                  {errors.unit && <div className='update-item-modal-error-message-unit'>{errors.unit}</div>}
+                </label>
+              </div>
+            </div>
+            
+            
+
           </div>
-          <div className='add-shoppinglist-modal-button-container'>
+          <div className='update-item-modal-button-container'>
             <button onClick={onClose}>Cancel</button>
             <button type="submit">Update</button>
+            <div className='update-item-modal-delete-button'>
+              <button  onClick={() => {deleteItem(shoppingListId, initialItemData._id)}}>delete</button>  
+            </div>
+            
           </div>
         </form>
       </div>

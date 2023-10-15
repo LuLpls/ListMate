@@ -1,65 +1,63 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useContext} from 'react'
 import '../styles/itemsCard.css'
 import { useParams } from 'react-router-dom'
 import ItemUpdateModal from './ItemUpdateModal'
+import { ShoppingListDetailContext } from '../components/context/ItemContext'
 
 const ItemsCard = ({ item }) => {
 
-  const shoppingListId = useParams()
+  const { id } = useParams()
   
   const [isCompleted, setIsCompleted] = useState(item.completed)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { completeItem } = useContext(ShoppingListDetailContext);
 
-  useEffect(() => {
-    console.log('zmena stavu item')
-  },[item])
+
 
   const onComplete = async () => {
     setIsCompleted(!isCompleted)
-      try {
-        const response = await fetch(`http://localhost:5000/shoppinglist/${shoppingListId.id}/item/complete/${item._id}`, {
-          method: 'PUT',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({completed: !isCompleted}),
-        })
-    
-        if (response.ok) {
-          console.log('Item was succesfully completed')
-        } else {
-          // Zpracování chyby, pokud server vrátí chybový stav.
-          console.error('Item wasnt updated.')
-        }
-      } catch (error) {
-        // Zpracování chyby při komunikaci se serverem.
-        console.error('Server communication error:', error)
-      }
-    
+    completeItem(id, item._id, isCompleted )
   } 
   
   return (
     <div className='item-card-wrapper'>
-      <div className='item-card-container'>
-        
-      <input 
-        type="checkbox"
-        checked={isCompleted}
-        onChange={onComplete}
-      />
-      <div>{item.quantity}</div>
-      <div>
-        {item.name}
-      </div>
+      <div className='item-card-container'> 
       
-      <button onClick={() => {setIsModalOpen(true)}}>...</button>
+        <div className='item-card-label-name-container'>
+          <label className='item-card-label'>
+
+            <input className='item-card-input'
+                  type="checkbox"
+                  checked={isCompleted}
+                  onChange={onComplete}
+                />
+            <span className='item-card-checkmark'></span>
+            </label>
+            
+
+          <div className='item-card-name'>{item.name}</div>
+        
+
+          <div className='item-card-quantity-unit-container'>
+            <div className='item-card-quantity'>
+              {item.quantity}
+            </div>
+            <div className='item-card-unit'>
+              {item.unit}
+            </div>
+          </div>
+        </div>
+
+        <div className='item-card-button'>
+          <div onClick={() => {setIsModalOpen(true)}}><img src='/option_wheel.png' alt='options'/></div>
+        </div>
+        
       </div>
 
       {isModalOpen && <ItemUpdateModal 
           initialItemData={item} 
           onClose={() => {setIsModalOpen(false)}} 
-          shoppingListId={shoppingListId.id}
+          shoppingListId={id}
           />}
     </div>
   )

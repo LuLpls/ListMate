@@ -1,22 +1,22 @@
 .shoppinglist-card-container {
-  background-color: rgb(194, 194, 194);
+  background-color: rgb(31,31,31);
   margin-top: 30px;
   padding: 5px;
-  width: 1200px;
+  width: 1000px;
   min-height: 105px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .shoppinglist-card-container:hover {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
 .shoppinglist-card-link {
   text-decoration: none;
-  color: black;
+  color: rgb(245, 245, 245);
 }
 
 .shoppinglist-card-data-container p {
@@ -28,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
-  border-bottom: 2px solid rgb(104, 104, 104);
+  border-bottom: 4px solid rgb(90, 90, 90);
 }
 
 .shoppinglist-card-dropdown {
@@ -41,9 +41,9 @@
   border-radius: 8px;
   font-size: 20px;
   padding: 7px 120px;
+  color: rgb(245,245,245);
+  transition: background-color 0.4s ease;
 }
-
-
 
 @media (max-width: 1500px) {
   .shoppinglist-card-dropdown div {
@@ -85,15 +85,16 @@
 }
 
 .shoppinglist-card-dropdown div:hover {
-  background-color: rgb(143, 143, 143);
+  background-color: rgb(0, 0, 0);
 }
 
 .shoppinglist-card-data-container button {
   border-radius: 20px;
   border: none;
-  background-color: rgb(194, 194, 194);
+  background-color: rgb(31, 31, 31);
   padding: 3px 8px;
   cursor: pointer;
+  transition: background-color 0.4s ease;
 }
 
 .shoppinglist-card-data-container img {
@@ -101,5 +102,5 @@
 }
 
 .shoppinglist-card-data-container button:hover {
-  background-color: rgb(143, 143, 143)
+  background-color: rgb(0, 0, 0)
 }

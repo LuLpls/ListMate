@@ -1,5 +1,5 @@
 .navbar-container {
-  background-color: rgb(56, 57, 57);
+  background-color: rgb(31, 31, 31);
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -33,8 +33,8 @@
 /* Sidebar */
 
 .sidebar-container {
-  background-color: rgb(56, 57, 57);
-  width: 200px;
+  background-color: rgb(31, 31, 31);
+  width: 220px;
   height: 100%; 
   position: fixed; 
   top: 0; 
@@ -50,20 +50,19 @@
 
 .sidebar-nav {
   margin-top: 80px;
-  margin-left: 200px;
+  margin-left: 220px;
 }
 
-
-
 .sidebar-link-container div {
-  width: 180px;
-  height: 40px;
+  width: 200px;
+  height: 50px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   margin-left: 10px;
+  margin-bottom: 4px;
   transition: background-color 0.3s ease;
 }
 
@@ -75,5 +74,5 @@
 .sidebar-link-container a {
   color: rgb(255, 255, 255);
   text-decoration: none;
-  
+  font-size: 18px;
 }
