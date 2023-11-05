@@ -19,6 +19,7 @@
   color: rgb(245, 245, 245);
 }
 
+
 .shoppinglist-card-data-container p {
   font-size: 20px;
   margin-top: 4px;
@@ -56,7 +57,7 @@
 
 @media (max-width: 1190px) {
   .shoppinglist-card-dropdown div {
-      padding: 7px 50px
+    padding: 7px 50px
   }
   .shoppinglist-card-container{
     width: 700px;
@@ -65,7 +66,7 @@
 
 @media (max-width: 815px) {
   .shoppinglist-card-dropdown div {
-      padding: 7px 30px
+    padding: 7px 30px
   }
   .shoppinglist-card-container{
     width: 500px;
@@ -74,10 +75,10 @@
 
 @media (max-width: 695px) {
   .shoppinglist-card-dropdown {
-    padding: 8px 25px;
+    padding: 8px 10px;
   }
   .shoppinglist-card-dropdown div {
-      padding: 7px 15px;
+    padding: 7px 15px;
   }
   .shoppinglist-card-container{
     width: 300px;

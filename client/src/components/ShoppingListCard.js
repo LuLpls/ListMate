@@ -11,18 +11,16 @@ const ShoppingListCard = ({ shoppingListData }) => {
 
   const toggleDropDown =(e) => {
     e.preventDefault()
-    e.stopPropagation();
     setIsDropDownOpen(!isDropDownOpen)
   }
 
   return (
     <div className='shoppinglist-card-container'>
-      <Link className='shoppinglist-card-link' to={shoppingListData.deleted ? '#' : `/shoppinglist/${shoppingListData._id}`}>
+      <Link className='shoppinglist-card-link' to={shoppingListData.deleted ? '#' : `shoppinglist/${shoppingListData._id}`}>
         <div className='shoppinglist-card-data-container'>
           <div className='shoppinglist-card-name-wrapper'>
             <h2>{shoppingListData.name}</h2>
           </div>
-          
           <button onClick={toggleDropDown} ><img src="./options_dots.png" alt="options" /></button>
         </div>
       </Link>

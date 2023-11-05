@@ -4,7 +4,10 @@ const shoppingListModel = require('../../models/shoppingList');
 
 itemtPost.post('/shoppinglist/:id/item/post', async (req, res) => {
     const shoppingListId = req.params.id;
-    const { name, completed} = req.body
+    let { name, completed} = req.body
+    if(!name || name.trim() === '')  {
+      name = 'New Item'
+    }
     const item = 
         {
             name: name,
@@ -12,21 +15,17 @@ itemtPost.post('/shoppinglist/:id/item/post', async (req, res) => {
             quantity: '',
             unit: '',
         }
-    
 
     // uložení do databáze 
     try {
-
         const shoppingList = await shoppingListModel.findByIdAndUpdate(
           shoppingListId,
           { $push: { items: item } },
           { new: true }
         )
-
-    return res.json(shoppingList) 
-    
+    return res.json(shoppingList)  
     } catch (err) {
-            return res.status(500).json({ msg: 'Interní serverová chyba' })
+      return res.status(500).json({ msg: 'Interní serverová chyba' })
     }
 })
 

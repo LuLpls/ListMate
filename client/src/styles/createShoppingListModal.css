@@ -75,3 +75,8 @@
 .create-shoppinglist-modal-button-container button:hover {
   background-color: rgb(203, 145, 39);
 }
+
+.create-shoppinglist-error-message {
+  color: rgb(233, 40, 40);
+  margin-top: 7px ;
+}

@@ -24,26 +24,23 @@ const ItemUpdateModal = ({ initialItemData, onClose, shoppingListId }) => {
       [name]: value
     })
     
-
     if (name === 'name') {
       if (value.length > 30) {
-      setErrors((prevErrors) => ({ ...prevErrors, name: 'The name must not exceed 30 characters.' }))
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, name: '' }))
+        setErrors((prevErrors) => ({ ...prevErrors, name: 'The name must not exceed 30 characters.' }))
+      } else {
+        setErrors((prevErrors) => ({ ...prevErrors, name: '' }))
+      }
     }
-  }
-    
+      
     if (name === 'unit') {
       if (value.length > 10) {
-      setErrors((prevErrors) => ({ ...prevErrors, unit: 'The unit must not exceed 10 characters.' }))
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, unit: '' }))
+        setErrors((prevErrors) => ({ ...prevErrors, unit: 'The unit must not exceed 10 characters.' }))
+      } else {
+        setErrors((prevErrors) => ({ ...prevErrors, unit: '' }))
+      }
     }
   }
-   
-}
-  
-console.log(errors)
+
   return (
     <div className='update-item-modal-container'>
       <div className='update-item-modal-content'>
@@ -66,7 +63,6 @@ console.log(errors)
                 {errors.name && <div className='update-item-modal-error-message-name'>{errors.name}</div>}
               </label>
             </div>
-            
             <div className='update-item-modal-quantity-unit-container'>
               <div className='update-item-modal-quantity-input'>
                 <label htmlFor="quantity">
@@ -95,15 +91,12 @@ console.log(errors)
                 </label>
               </div>
             </div>
-            
-            
-
           </div>
           <div className='update-item-modal-button-container'>
             <button onClick={onClose}>Cancel</button>
             <button type="submit">Update</button>
             <div className='update-item-modal-delete-button'>
-              <button  onClick={() => {deleteItem(shoppingListId, initialItemData._id)}}>delete</button>  
+              <button  onClick={() => {deleteItem(shoppingListId, initialItemData._id)}}>Delete</button>  
             </div>
             
           </div>

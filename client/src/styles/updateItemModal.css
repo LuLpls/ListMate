@@ -54,7 +54,7 @@
 }
 
 .update-item-modal-unit-input input {
-  width: 118px;
+  width: 100px;
 }
 
 .update-item-modal-title {
@@ -101,7 +101,7 @@
 }
 
 .update-item-modal-delete-button button {
-  background-color: rgb(235, 34, 34);
+  background-color: rgb(190, 39, 39);
 }
 
 .update-item-modal-delete-button button:hover {
@@ -109,14 +109,17 @@
 }
 
 .update-item-modal-error-message-name {
-  color: rgb(233, 48, 48);
+  color: rgb(233, 40, 40);
+  font-size: 15px;
   margin-top: -15px;
   margin-bottom: 15px;
 }
 
 .update-item-modal-error-message-unit {
-  color: rgb(233, 48, 48);
+  color: rgb(233, 40, 40);
+  font-size: 15px;
   margin-top: 6px;
+  margin-left: -2px;
   max-width: 200px;
   overflow-wrap: break-word ;
 }

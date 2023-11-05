@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import SideBar from './bricks/SideBar'
+import SideBar from './SideBar'
 import '../styles/navigation.css'
+
 
 
 const Navigation = () => {
@@ -41,7 +42,8 @@ const Navigation = () => {
       </div>
       <div className={`sidebar-container ${sidebarVisible ? 'sidebar-visible' : ''}`}>
         { sidebarVisible && <SideBar /> }
-        </div>
+      </div>
+
     </nav>
   )
 }

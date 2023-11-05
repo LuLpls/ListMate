@@ -10,7 +10,8 @@ const ShoppingListDetail = () => {
   const { id } = useParams()
 
   const [itemInput, setItemInput] = useState({'name': '', 'completed': false, 'unit': '', 'quantity': ''})
-  const { shoppingList, loadShoppingList, postItem  } = useContext(ShoppingListDetailContext);
+  const [error, setError] = useState('')
+  const { shoppingList, loadShoppingList, postItem  } = useContext(ShoppingListDetailContext)
 
   // získání dat o nákupním seznamu pomocí fetch
   useEffect(() => {
@@ -25,12 +26,19 @@ const ShoppingListDetail = () => {
         ...itemInput,
         [name]: value,
       })
+
+    if (value.length > 30) {
+      setError('The name must not exceed 30 characters')
+    } else {
+      setError('')
+    }
   }
 
   const handlePost = () => {
-    console.log('Itam has been posted');
+    if(!error) {
       postItem(id, itemInput)
       setItemInput({name: ''})
+    }
   }
 
   const handleKeyPress = (e) => {
@@ -62,9 +70,10 @@ const ShoppingListDetail = () => {
                     onKeyPress={handleKeyPress}
                   />
                 </label>
-              </div>
-              <div className='shoppinglist-detail-plus-icon' onClick={handlePost}><img src="/plus_icon.png" alt="plus" /></div>
+              </div>          
+              <div className='shoppinglist-detail-plus-icon' onClick={handlePost}><img src="/plus_icon.png" alt="plus" /></div> 
             </div>
+            { error && <div className='create-item-error-message'>{error}</div> }
             <div className='shoppinglist-detail-items'>
               {shoppingList?.items && shoppingList.items.map((item, index) => {   
                 if (!item.completed) {   

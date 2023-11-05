@@ -79,3 +79,8 @@
 .shoppinglist-detail-plus-icon:hover {
   background-color: rgb(203, 145, 39);
 }
+
+.create-item-error-message {
+  color: rgb(201, 40, 40);
+  padding-top: 10px ;
+}

@@ -65,7 +65,7 @@ const RenameModal = ({ initialShoppingListData, onClose }) => {
     })
 
     if (value.length > 30) {
-      setError('The input length must not exceed 30 characters.')
+      setError('The name must not exceed 30 characters.')
     } else {
       setError('')
     }

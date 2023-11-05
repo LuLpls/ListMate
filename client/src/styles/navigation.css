@@ -43,7 +43,7 @@
   transform: translateX(-100%);
 }
 
-/* Přidáme třídu pro zobrazení Sidebar */
+
 .sidebar-visible {
   transform: translateX(0); /* Sidebar je viditelný */
 }
@@ -66,13 +66,25 @@
   transition: background-color 0.3s ease;
 }
 
-.sidebar-link-container div:hover {
- background-color: black;
+.sidebar-link-container a {
+  color: rgb(245, 245, 245);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sidebar-active-link {
+  background-color: rgb(226, 174, 78);  
+  color: black;
 }
 
 
-.sidebar-link-container a {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  font-size: 18px;
+
+.sidebar-active-link:hover {
+  background-color: rgb(203, 145, 39); 
+  
+}
+
+.sidebar-notactive-link:hover {
+  background-color: black;
 }

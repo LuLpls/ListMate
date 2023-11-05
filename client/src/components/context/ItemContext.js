@@ -109,9 +109,9 @@ export const ShoppingListDetailProvider = ({ children }) => {
 
       if (response.ok) {
         loadShoppingList(shoppingListId);
-        console.log('Shopping List has been deleted');
+        console.log('Item has been deleted');
       } else {
-        console.error('Error during deletion of the shopping list');
+        console.error('Error during deletion of the item');
       }
     } catch (error) {
       console.error('Error communicating with the server:', error);

@@ -4,13 +4,14 @@ import ShoppingListList from './pages/ShoppingListList'
 import ShoppingListTrash from './pages/ShoppingListTrash'
 import ShoppingListDetail from './pages/ShoppingListDetail'
 import NotFound from './pages/NotFound'
+import About from './pages/About'
 import { ShoppingListsProvider } from './components/context/ShoppingListContext'
 import { ShoppingListDetailProvider } from './components/context/ItemContext'
 
 
 function App() {
   return (
-    <div className='main-container'>
+    <div>
     <BrowserRouter>
       <div className='App'>
         <Navigation />
@@ -22,6 +23,7 @@ function App() {
               <Route path='/' element={<ShoppingListList />} />
               <Route path='/trash' element={<ShoppingListTrash />} />
               <Route path='/shoppinglist/:id' element={<ShoppingListDetail />} />
+              <Route path='/about' element={<About />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </ShoppingListDetailProvider>

@@ -53,8 +53,8 @@ const CreateModal = ({ onClose }) => {
       [name]: value,
     })
 
-    if (value.length > 30) {
-      setError('The name must not exceed 30 characters.')
+    if (value.length > 15) {
+      setError('The name must not exceed 15 characters.')
     } else {
       setError('')
     }
@@ -66,8 +66,6 @@ const CreateModal = ({ onClose }) => {
         <div className='create-shoppinglist-modal-title'>
           <h2>Create Shopping List</h2>
         </div>
-        
-        
         <form className='create-shoppinglist-modal-form' onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">
