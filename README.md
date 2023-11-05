@@ -11,9 +11,9 @@ Web Application for managing shopping lists
 
 
 -	Pro start aplikace
-    - nainstalovat všechny dependencies - příkaz: npm install v adresáři projektu i ve složce client
-    - v adresáři projektu - příkaz: nodemon server    // nastartuje server
-    - ve složce frontendu (client):  npm run start    // spustí frontend aplikace
+    - nainstalovat všechny dependencies - v adresáři projektu i ve složce client - příkaz: npm install
+    - nastartování serveru - v adresáři projektu - příkaz: nodemon server    
+    - spuštění frontendu aplikace - ve složce frontendu (client):  npm run start
  
 
 
