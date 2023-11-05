@@ -19,6 +19,8 @@ Web Application for managing shopping lists
 
 To do list:
 - naimplementovat změnu dark/light mod
+- přidat nějakou indikaci na stránce nákupních seznamů, která bude znamenat, že je seznam hotový (bude mít všechny položky odškrtnuté)
+- implementace stránkování nákupních seznamů na stránce nákupních seznamů
 - přidat entitu uživatele na backendu plus možnost sdílení nákupních seznamů
 - na frontendu implementovat Login Page, profil uživatele... 
 
